@@ -33,7 +33,7 @@ for:
       - openssl aes-256-cbc -d -in .\resources\secrets\config.json.enc -out .\config.json -k "%CSC_ENC_KEY%"
     build_script:
       - make build
-      - make test
+      - npx jest --config=./jest.config.js --maxWorkers=1
       - npx electron-builder --win -p onTag
 
   # Windows Store build / .appx / unsigned
@@ -68,8 +68,8 @@ artifacts:
   - path: release\*.yml
 
 cache:
-  - node_modules -> package.json
-  - '%APPDATA%\npm-cache -> package.json'
+  - node_modules -> package-lock.json
+  - '%APPDATA%\npm-cache -> package-lock.json'
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
 # RDP Debug mode

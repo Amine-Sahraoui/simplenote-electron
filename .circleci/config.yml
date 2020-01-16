@@ -45,7 +45,8 @@ jobs:
       - run: patch -p1 < ./resources/macos/scheme-patch.diff
       - run: make build
       - run: make lint
-      - run: make test
+      - run: npx jest --config=./jest.config.js --maxWorkers=1
+
       - persist_to_workspace:
           root: ~/simplenote
           paths: *app_cache_paths
